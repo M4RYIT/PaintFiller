@@ -50,4 +50,4 @@ int pixel_index(const vec2 *pos, const int w, const int channels);
 
 void set_color(uint8_t *data, const int index, color *new_col);
 
-int compare_colors(const color *col_1, const color *col_2);
+int compare_colors(const color *col_1, const color *col_2, const size_t channels);

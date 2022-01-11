@@ -101,7 +101,7 @@ void iter_algo_1(uint8_t *data, const vec2 *dim, const int channels, color *new_
 
         array_add(visited, &index);
 
-        if (!compare_colors(old_col, get_col(data, index)))
+        if (!compare_colors(old_col, get_col(data, index), channels))
         {
             set_color(data, index, new_col);
         }
@@ -163,7 +163,7 @@ int validate(uint8_t *data, const vec2 *dim, const int channels, vec2 *pos, colo
 
    if (array_contains(visited, out_index)) return 0;
    
-   if (compare_colors(old_col, get_col(data, *out_index))) return 0;
+   if (compare_colors(old_col, get_col(data, *out_index), channels)) return 0;
 
    return -1;
 }
@@ -180,7 +180,7 @@ void dyn_rec_algo(uint8_t *data, const vec2 *dim, const int channels, vec2 pos, 
 
     color *current_col = get_col(data, index);
 
-    if (compare_colors(current_col, old_col)) return;
+    if (compare_colors(current_col, old_col, channels)) return;
 
     set_color(data, index, new_col);
 
@@ -198,7 +198,7 @@ void rec_algo(uint8_t *data, const vec2 *dim, const int channels, vec2 pos, colo
 
     color *current_col = get_col(data, index);
 
-    if (compare_colors(current_col, old_col)) return;
+    if (compare_colors(current_col, old_col, channels)) return;
 
     set_color(data, index, new_col);
 
@@ -227,18 +227,12 @@ int pixel_index(const vec2 *pos, const int w, const int channels)
 
 void set_color(uint8_t *data, const int index, color *new_col)
 {
-    //*((color*)&data[index]) = *new_col;
-
     data[index + 0] = new_col->r;
     data[index + 1] = new_col->g;
     data[index + 2] = new_col->b;
 }
 
-int compare_colors(const color *col_1, const color *col_2)
+int compare_colors(const color *col_1, const color *col_2, const size_t channels)
 {
-    if (col_1->r != col_2->r) return -1;
-    if (col_1->g != col_2->g) return -1;
-    if (col_1->b != col_2->b) return -1;
-
-    return 0;
+    return memcmp(col_1, col_2, channels);
 }

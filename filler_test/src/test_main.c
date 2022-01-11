@@ -1,6 +1,7 @@
 #include "clove.h"
 #include "test_fill_algo.h"
 #include "test_fill.h"
+#include "test_utils.h"
 
 // Recursive algo
 // CLOVE_RUNNER(FillAlgo_Rec_OnePixel, FillAlgo_Rec_OnePixelOffRange, 

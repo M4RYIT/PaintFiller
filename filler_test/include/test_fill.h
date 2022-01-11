@@ -20,8 +20,9 @@ CLOVE_TEST(Fill_Rec_Img016x16)
     int channels;
     uint8_t *res = stbi_load(dst, &dim.x, &dim.y, &channels, 0);
     uint8_t *t = stbi_load(test, &dim.x, &dim.y, &channels, 0);
+    size_t sz = dim.x * dim.y * channels;
 
-    CLOVE_INT_EQ(0, memcmp(res, t, sizeof(uint8_t)));
+    CLOVE_INT_EQ(0, memcmp(res, t, sz));
 
     stbi_image_free(res);
     stbi_image_free(t);
@@ -41,8 +42,9 @@ CLOVE_TEST(Fill_Dyn_Rec_Img016x16)
     int channels;
     uint8_t *res = stbi_load(dst, &dim.x, &dim.y, &channels, 0);
     uint8_t *t = stbi_load(test, &dim.x, &dim.y, &channels, 0);
+    size_t sz = dim.x * dim.y * channels;
 
-    CLOVE_INT_EQ(0, memcmp(res, t, sizeof(uint8_t)));
+    CLOVE_INT_EQ(0, memcmp(res, t, sz));
 
     stbi_image_free(res);
     stbi_image_free(t);
@@ -62,8 +64,9 @@ CLOVE_TEST(Fill_Iter_Img016x16)
     int channels;
     uint8_t *res = stbi_load(dst, &dim.x, &dim.y, &channels, 0);
     uint8_t *t = stbi_load(test, &dim.x, &dim.y, &channels, 0);
+    size_t sz = dim.x * dim.y * channels;
 
-    CLOVE_INT_EQ(0, memcmp(res, t, sizeof(uint8_t)));
+    CLOVE_INT_EQ(0, memcmp(res, t, sz));
 
     stbi_image_free(res);
     stbi_image_free(t);
