@@ -1,0 +1,1 @@
+clang -Ifiller_test\include -Ifiller_core\include -o bin\test.exe filler_test\src\*.c -L bin -l filler_core
