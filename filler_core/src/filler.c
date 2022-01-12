@@ -103,7 +103,7 @@ void iter_algo_1(uint8_t *data, const vec2 *dim, const int channels, color *new_
 
         if (!compare_colors(old_col, get_col(data, index), channels))
         {
-            set_color(data, index, new_col);
+            set_color(data, index, new_col, channels);
         }
 
         list_append(target, &(vec2){pos.x+1, pos.y});
@@ -127,7 +127,7 @@ void iter_algo_2(uint8_t *data, const vec2 *dim, const int channels, color *new_
 
         index = pixel_index(&pos, dim->x, channels);
 
-        set_color(data, index, new_col);
+        set_color(data, index, new_col, channels);
 
         if (validate(data, dim, channels, &(vec2){pos.x+1, pos.y}, old_col, visited, &index))
         {
@@ -182,7 +182,7 @@ void dyn_rec_algo(uint8_t *data, const vec2 *dim, const int channels, vec2 pos, 
 
     if (compare_colors(current_col, old_col, channels)) return;
 
-    set_color(data, index, new_col);
+    set_color(data, index, new_col, channels);
 
     dyn_rec_algo(data, dim, channels, (vec2){pos.x+1, pos.y}, new_col, old_col, cache);
     dyn_rec_algo(data, dim, channels, (vec2){pos.x-1, pos.y}, new_col, old_col, cache);
@@ -200,7 +200,7 @@ void rec_algo(uint8_t *data, const vec2 *dim, const int channels, vec2 pos, colo
 
     if (compare_colors(current_col, old_col, channels)) return;
 
-    set_color(data, index, new_col);
+    set_color(data, index, new_col, channels);
 
     rec_algo(data, dim, channels, (vec2){pos.x+1, pos.y}, new_col, old_col);
     rec_algo(data, dim, channels, (vec2){pos.x-1, pos.y}, new_col, old_col);
@@ -225,11 +225,12 @@ int pixel_index(const vec2 *pos, const int w, const int channels)
     return (pos->x + pos->y * w) * channels;
 }
 
-void set_color(uint8_t *data, const int index, color *new_col)
+void set_color(uint8_t *data, const int index, color *new_col, const int channels)
 {
-    data[index + 0] = new_col->r;
-    data[index + 1] = new_col->g;
-    data[index + 2] = new_col->b;
+    for (size_t i=0; i<channels; i++)
+    {
+        data[index + i] = ((uint8_t*)new_col)[i];
+    }
 }
 
 int compare_colors(const color *col_1, const color *col_2, const size_t channels)

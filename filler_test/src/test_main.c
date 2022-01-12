@@ -4,8 +4,8 @@
 #include "test_utils.h"
 
 // Recursive algo
-// CLOVE_RUNNER(FillAlgo_Rec_OnePixel, FillAlgo_Rec_OnePixelOffRange, 
-//              FillAlgo_Rec_1x3First2PixelsUpdated, Fill_Rec_Img016x16);
+CLOVE_RUNNER(FillAlgo_Rec_OnePixel, FillAlgo_Rec_OnePixelOffRange, 
+             FillAlgo_Rec_1x3First2PixelsUpdated, Fill_Rec_Img016x16);
 
 // Dynamic recursive algo
 // CLOVE_RUNNER(FillAlgo_Dyn_Rec_OnePixel, FillAlgo_Dyn_Rec_OnePixelOffRange, 
