@@ -2,6 +2,16 @@
 #include <string.h>
 #include <stdlib.h>
 
+typedef enum
+{
+    Rec,
+    Dyn_Rec,
+    Iter
+}
+algo_type;
+
+static algo_type algo = Rec;
+
 char *concat_path(const char *base, const char *name)
 {
     size_t size = strlen(base) + strlen(name) + 1;

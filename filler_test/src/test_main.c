@@ -3,14 +3,7 @@
 #include "test_fill.h"
 #include "test_utils.h"
 
-// Recursive algo
-CLOVE_RUNNER(FillAlgo_Rec_OnePixel, FillAlgo_Rec_OnePixelOffRange, 
-             FillAlgo_Rec_1x3First2PixelsUpdated, Fill_Rec_Img016x16);
-
-// Dynamic recursive algo
-// CLOVE_RUNNER(FillAlgo_Dyn_Rec_OnePixel, FillAlgo_Dyn_Rec_OnePixelOffRange, 
-//              FillAlgo_Dyn_Rec_1x3First2PixelsUpdated, Fill_Dyn_Rec_Img016x16);
-
-// Iterative algo
-// CLOVE_RUNNER(FillAlgo_Iter_OnePixel, FillAlgo_Iter_OnePixelOffRange, 
-//              FillAlgo_Iter_1x3First2PixelsUpdated, Fill_Iter_Img016x16);
+// Recursive - Dynamic Recursive - Iterative Algo
+CLOVE_RUNNER(FillAlgo_OnePixel, FillAlgo_OnePixelOffRange, FillAlgo_1x3First2PixelsUpdated,
+             FillAlgo_4ChannelsImage, FillAlgo_2ChannelsImage, FillAlgo_1ChannelImage,
+             FillAlgo_1x3First2PixelsStartCenter, FillAlgo_1x3First2PixelsStartLast, Fill_Imag16x16);
