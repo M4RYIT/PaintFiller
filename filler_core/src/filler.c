@@ -9,6 +9,8 @@
 
 void fill_rec(const char *dst_path, const char *src_path, vec2 pos, color new_col)
 {
+    puts("Recursive");
+
     int channels;
     vec2 dim;
     uint8_t *data = stbi_load(src_path, &dim.x, &dim.y, &channels, 0);
@@ -22,6 +24,8 @@ void fill_rec(const char *dst_path, const char *src_path, vec2 pos, color new_co
 
 void fill_dyn_rec(const char *dst_path, const char *src_path, vec2 pos, color new_col)
 {
+    puts("Dynamic Recursive");
+
     int channels;
     vec2 dim;
     uint8_t *data = stbi_load(src_path, &dim.x, &dim.y, &channels, 0);
@@ -35,6 +39,8 @@ void fill_dyn_rec(const char *dst_path, const char *src_path, vec2 pos, color ne
 
 void fill_iter(const char *dst_path, const char *src_path, vec2 pos, color new_col)
 {
+    puts("Iterative");
+
     int channels;
     vec2 dim;
     uint8_t *data = stbi_load(src_path, &dim.x, &dim.y, &channels, 0);
@@ -80,14 +86,15 @@ void fill_iter_algo(uint8_t *data, const vec2 *dim, const int channels, vec2 pos
     list_init(&target, sizeof(vec2));
     list_append(&target, &pos);
 
-    iter_algo_1(data, dim, channels, new_col, &sample_col, &visited, &target);
-    // iter_algo_2(data, dim, channels, new_col, &sample_col, &visited, &target);
+    // iter_algo_1(data, dim, channels, new_col, &sample_col, &visited, &target);
+    iter_algo_2(data, dim, channels, new_col, &sample_col, &visited, &target);
 }
 
 void iter_algo_1(uint8_t *data, const vec2 *dim, const int channels, color *new_col, color *old_col, array *visited, list *target)
 {
     vec2 pos;
     int index;
+    int count = 0;
 
     while(!list_empty(target))
     {
@@ -106,6 +113,9 @@ void iter_algo_1(uint8_t *data, const vec2 *dim, const int channels, color *new_
             set_color(data, index, new_col, channels);
         }
 
+        count++;
+        printf("%d\n", count);
+
         list_append(target, &(vec2){pos.x+1, pos.y});
         list_append(target, &(vec2){pos.x-1, pos.y});
         list_append(target, &(vec2){pos.x, pos.y+1});
@@ -117,12 +127,16 @@ void iter_algo_2(uint8_t *data, const vec2 *dim, const int channels, color *new_
 {
     vec2 pos;
     int index;
+    int count = 0;
 
     index = pixel_index(&pos, dim->x, channels);
     array_add(visited, &index);
 
     while(!list_empty(target))
     {
+        count++;
+        printf("%d\n", count);
+
         list_pop(target, &pos);
 
         index = pixel_index(&pos, dim->x, channels);

@@ -10,7 +10,9 @@ typedef enum
 }
 algo_type;
 
-static algo_type algo = Rec;
+// static algo_type algo = Rec;
+// static algo_type algo = Dyn_Rec;
+static algo_type algo = Iter;
 
 char *concat_path(const char *base, const char *name)
 {

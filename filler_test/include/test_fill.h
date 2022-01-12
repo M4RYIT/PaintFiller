@@ -5,7 +5,7 @@
 #include "stb_image.h"
 #include "test_utils.h"
 
-CLOVE_TEST(Fill_Imag16x16)
+CLOVE_TEST(Fill_Image16x16)
 {
     char *dst = "assets\\update16x16.png";
     char *src = "assets\\img16x16.png";
@@ -39,4 +39,31 @@ CLOVE_TEST(Fill_Imag16x16)
 
     stbi_image_free(res);
     stbi_image_free(t);
+}
+
+CLOVE_TEST(Fill_Image480x480)
+{
+    char *dst = "assets\\update480x480.png";
+    char *src = "assets\\img480x480.png";
+    char *test = "assets\\result1024x768.png";
+
+    color new_col = {0, 255, 0};
+    vec2 pos = {0, 0};
+
+    switch(algo)
+    {
+        case Rec:
+        fill_rec(dst, src, pos, new_col);
+        break;
+
+        case Dyn_Rec:
+        fill_dyn_rec(dst, src, pos, new_col);
+        break;
+
+        case Iter:
+        fill_iter(dst, src, pos, new_col);
+        break;
+    }
+
+    CLOVE_IS_TRUE(1);
 }
